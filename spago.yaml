@@ -1,0 +1,30 @@
+package:
+  name: yo
+  dependencies:
+    - console
+    - effect
+    - prelude
+    - integers # Data.Int
+    - numbers  # Data.Number
+    - foldable-traversable   # Data.Foldable, etc. foldl, foldr.
+    - lists  # Data.List, Data.List.Lazy
+  test:
+    main: Test.Main
+    dependencies: []
+workspace:
+  packageSet:
+    registry: 66.8.0
+  extraPackages:
+    numbers: 9.0.1   # Data.Number
+    integers: 6.0.0  # Data.Int
+    lists: 7.0.0  # Data.List, Data.List.Lazy
+    foldable-traversable: 6.0.0 # Data.Foldable, etc.
+
+    # math: 4.0.0
+    # Math has been deprecated and I can't get the package installed.
+
+# Example in repl:
+# > import Data.Int as I
+# > import Data.Number as N
+# > N.pow 2.0 3.0
+# > I.pow 2 3
