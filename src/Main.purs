@@ -4,7 +4,7 @@ module Main where
 -- spago build or spago run.
 import Prelude
 import Effect (Effect)
-import Effect.Console (log)
+import Effect.Console (log, logShow)
 import Data.Number as N
 import Data.Int as I
 
@@ -32,6 +32,7 @@ main = do
         log "Yow!"
         log s
         log (show z)
+        logShow z
         log $ show $ I.pow 5 4
         log $ show $ N.pow x nn
         log $ show $ N.pow x 3.0
