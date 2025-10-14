@@ -7,6 +7,7 @@ import Effect (Effect)
 import Effect.Console (log, logShow)
 import Data.Number as N
 import Data.Int as I
+import Data.Maybe
 
 s :: String
 s = "this " <> "that"
@@ -20,8 +21,12 @@ n = -4 + -1
 z :: Int
 z = 27
 
--- maybeint :: Maybe Int
--- maybeint = fromNumber x
+maybeint :: Maybe Int
+maybeint = I.fromNumber x
+maybenum :: Maybe Number
+maybenum = Just 25.0
+
+maybenum2 = Just 32.0
 
 nn :: Number
 nn = I.toNumber n
@@ -29,7 +34,11 @@ nn = I.toNumber n
 
 main :: Effect Unit
 main = do
-        log "Yow!"
+        logShow maybeint
+        logShow maybenum
+        logShow maybenum2
+        let nine = 9
+        logShow nine
         log s
         log (show z)
         logShow z
