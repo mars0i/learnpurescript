@@ -6,6 +6,8 @@ package:
     - prelude
     - integers # Data.Int
     - numbers  # Data.Number
+    - arrays   # Data.Array
+#    - lists    # Data.List
     - foldable-traversable   # Data.Foldable, etc. foldl, foldr.
     - lists  # Data.List, Data.List.Lazy
   test:
@@ -18,6 +20,8 @@ workspace:
     numbers: 9.0.1   # Data.Number
     integers: 6.0.0  # Data.Int
     lists: 7.0.0  # Data.List, Data.List.Lazy
+    # Note this is "array", not "arrays":
+    array: 4.0.1 # Data.Array
     foldable-traversable: 6.0.0 # Data.Foldable, etc.
 
     # math: 4.0.0
