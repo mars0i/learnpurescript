@@ -27,6 +27,7 @@ maybeint = I.fromNumber x
 maybenum :: Maybe Number
 maybenum = Just 25.0
 
+-- No type sig generates a MissingTypeDeclaration warning, but we can suppress that in vimrc
 maybenum2 = Just 32.0
 
 nn :: Number
