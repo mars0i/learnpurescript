@@ -1,3 +1,6 @@
+# docs for spago.yaml:
+# https://github.com/purescript/spago/tree/master?tab=readme-ov-file#the-configuration-file
+
 package:
   name: learnpurescript
   dependencies:
@@ -13,6 +16,7 @@ package:
   test:
     main: Test.Main
     dependencies: []
+
 workspace:
   packageSet:
     registry: 66.8.0
@@ -23,12 +27,14 @@ workspace:
     # Note this is "array", not "arrays":
     array: 4.0.1 # Data.Array
     foldable-traversable: 6.0.0 # Data.Foldable, etc.
-
     # math: 4.0.0
     # Math has been deprecated and I can't get the package installed.
-
-# Example in repl:
-# > import Data.Int as I
-# > import Data.Number as N
-# > N.pow 2.0 3.0
-# > I.pow 2 3
+  buildOpts:
+    # This is supposed to filter out matching warnings in command line build.
+    # Doesn't seem to be working.
+    # See docs above for more options.  For vim, configure lsp via lua.
+    censorLibraryWarnings: all
+      # [ MissingTypeDeclaration, UnusedImport ]
+      #"UnusedImport"
+      #"ImplicitImport"
+      #"UnusedExplicitImport"
