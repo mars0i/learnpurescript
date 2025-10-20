@@ -50,15 +50,46 @@ pairs3 = do
         z' <- 100..101
         pure [w',z']  -- generates array of array-pairs
 
+a :: Array Int
+a = do
+        x <- [2]
+        pure (1 + x)
+
+
+-- I'm sorry, but the syntax for collection monads is counterintuitive.
+-- The explicitly stated syntactic return value of >>= is just a 
+-- component of the actual returned value.  And if your return value looks
+-- like a singleton array or list, it's not (necessarily).  And they said 
+-- that monads weren't actually confusing.
+-- These all do the same thing, returning [2,3,4]:
+inked1 = 1..3 >>= \i -> [(i + 1)]
+inked2 = 1..3 >>= \i -> (i + 1) : []
+inked3 = 1..3 >>= \i -> pure (i + 1)
+inked4 = do
+        i <- 1..3
+        [(i + 1)]
+inked5 = do
+        i <- 1..3
+        (i + 1) : []
+inked6 = do
+        i <- 1..3
+        pure (i + 1)
+
 main :: Effect Unit
 main = do
-        logShow pairs1
-        logShow pairs2
-        logShow pairs3
+        log $ "pairs1: " <> (show pairs1)
+        log $ "pairs2: " <> (show pairs2)
+        log $ "pairs3: " <> (show pairs3)
+        log $ "inked1: " <> (show inked1)
+        log $ "inked2: " <> (show inked2)
+        log $ "inked3: " <> (show inked3)
+        log $ "inked4: " <> (show inked4)
+        log $ "inked5: " <> (show inked5)
+        log $ "inked6: " <> (show inked6)
+        {-
         logShow (10..14)  -- the parens are just delimiters
         logShow $ 10..14  -- this way works as well
         logShow [10..14]  -- array of array
-        {-
         log ""
         logShow maybeint
         logShow maybenum
