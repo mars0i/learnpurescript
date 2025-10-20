@@ -22,7 +22,6 @@ n = -4 + -1
 z1 :: Int
 z1 = 27
 
-maybeint :: Maybe Int
 maybeint = I.fromNumber x1
 maybenum :: Maybe Number
 maybenum = Just 25.0
@@ -57,10 +56,12 @@ a = do
 
 
 -- I'm sorry, but the syntax for collection monads is counterintuitive.
--- The explicitly stated syntactic return value of >>= is just a 
--- component of the actual returned value.  And if your return value looks
--- like a singleton array or list, it's not (necessarily).  And they said 
--- that monads weren't actually confusing.
+-- The explicitly stated syntactic return value of is just a collection,
+-- but then you get *multiple* collections like that, *and then* they
+-- are concatenated.  That is non-intuitive and non-transparent.
+-- And if your return value looks like a singleton array or list, it's not (necessarily).  
+-- And they said that monads weren't actually confusing.
+-- This is also what Purescript wants us to use to replace list comprehensions.
 -- These all do the same thing, returning [2,3,4]:
 inked1 = 1..3 >>= \i -> [(i + 1)]
 inked2 = 1..3 >>= \i -> (i + 1) : []
