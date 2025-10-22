@@ -9,6 +9,7 @@ import Data.Number as N
 import Data.Int as I
 import Data.Maybe
 import Data.Array
+import Data.List as L
 
 s :: String
 s = "this " <> "that"
@@ -23,13 +24,13 @@ z1 :: Int
 z1 = 27
 
 maybeint = I.fromNumber x1
-maybenum :: Maybe Number
 maybenum = Just 25.0
 
--- No type sig generates a MissingTypeDeclaration warning, but we can suppress that in vimrc
+-- No type sig generates a MissingTypeDeclaration warning, 
+-- but can suppress that in vimrc, or in spago.yaml for
+-- commandline build/run.
 maybenum2 = Just 32.0
 
-nn :: Number
 nn = I.toNumber n
 
 -- Note in Haskell list ranges have to be enclosed in [].
