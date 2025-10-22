@@ -16,6 +16,14 @@ package:
   test:
     main: Test.Main
     dependencies: []
+  build:
+    # Get rid of warnings that make exploration noisy.
+    # https://discourse.purescript.org/t/newbie-question-suppress-some-warnings/2851/9?u=mars0i
+    censorProjectWarnings:
+      - ImplicitImport
+      - MissingTypeDeclaration
+      - UnusedExplicitImport
+      - UnusedImport
 
 workspace:
   packageSet:
@@ -29,12 +37,3 @@ workspace:
     foldable-traversable: 6.0.0 # Data.Foldable, etc.
     # math: 4.0.0
     # Math has been deprecated and I can't get the package installed.
-  buildOpts:
-    # This is supposed to filter out matching warnings in command line build.
-    # Doesn't seem to be working.
-    # See docs above for more options.  For vim, configure lsp via lua.
-    censorLibraryWarnings: all
-      # [ MissingTypeDeclaration, UnusedImport ]
-      #"UnusedImport"
-      #"ImplicitImport"
-      #"UnusedExplicitImport"
