@@ -13,6 +13,7 @@ package:
 #    - lists    # Data.List
     - foldable-traversable   # Data.Foldable, etc. foldl, foldr.
     - lists  # Data.List, Data.List.Lazy
+    - random
   test:
     main: Test.Main
     dependencies: []
@@ -36,5 +37,6 @@ workspace:
     # Note this is "array", not "arrays":
     array: 4.0.1 # Data.Array
     foldable-traversable: 6.0.0 # Data.Foldable, etc.
+    random: 6.0.0
     # math: 4.0.0
     # Math has been deprecated and I can't get the package installed.

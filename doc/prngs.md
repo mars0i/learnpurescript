@@ -13,3 +13,4 @@ Sebastiano Vigna says (https://vigna.di.unimi.it/#prngs):
     Faster and better generators are described in the PRNG
     shootout page and in the papers linked therein.
 
+So that seems like an OK PRNG, but Math.Random can't be seeded by the user.
