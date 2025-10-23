@@ -22,6 +22,7 @@ package:
     censorProjectWarnings:
       - ImplicitImport
       - MissingTypeDeclaration
+      - ShadowedName
       - UnusedExplicitImport
       - UnusedImport
 
