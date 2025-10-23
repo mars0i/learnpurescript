@@ -50,6 +50,46 @@ pairs3 = do
         z' <- 100..101
         pure [w',z']  -- generates array of array-pairs
 
+f :: Int -> Int
+f n = if n > 0
+        then 1 + f (n - 1)
+        else 0
+
+g :: Int -> Int -> Int
+g a n = if n > 0
+        then g (a + 1) (n - 1)
+        else a
+
+
+
+main :: Effect Unit
+main = do
+        logShow pairs1
+        logShow pairs2
+        logShow pairs3
+        logShow (10..14)  -- the parens are just delimiters
+        logShow $ 10..14  -- this way works as well
+        logShow [10..14]  -- array of array
+        {-
+        log ""
+        logShow maybeint
+        logShow maybenum
+        logShow maybenum2
+        let nine = 9
+        logShow nine
+        log s
+        log (show z1)
+        logShow z1
+        log $ show $ I.pow 5 4
+        log $ show $ N.pow x1 nn
+        log $ show $ N.pow x1 3.0
+        log $ show $ N.pow x1 (- nn)
+        log (show (N.pow 2.0 0.5))
+        log (show n)
+        log "🍝"
+        -}
+
+
 main :: Effect Unit
 main = do
         logShow pairs1
