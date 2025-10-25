@@ -22,7 +22,10 @@ ricks k r init = LL.iterate (ricker k r) init
 seedless :: Effect Number -> Effect Number
 seedless _ = random
 
+randeffects :: LL.List (Effect Number)
 randeffects = LL.iterate seedless (pure 0.0)
+
+randeffects3 :: LL.List (Effect Number)
 randeffects3 = LL.take 3 $ LL.iterate seedless (pure 0.0)
 
 {-
@@ -40,6 +43,10 @@ main = do
         logShow randno
         logShow randno2
         logShow [randno, randno2]
+        let es = randeffects3
+        let en = LL.head es
+        -- Why is the compiler expecting a Maybe here?
+        let s = (en >>= \n -> show n)
         pure unit
 
 {- Doesn't work, though do version about does:
