@@ -22,6 +22,27 @@ ricks k r init = LL.iterate (ricker k r) init
 seedless :: Effect Number -> Effect Number
 seedless _ = random
 
+n1 :: Effect Number
+n1 = random
+
+n2 :: Effect Number
+n2 = n1 >>= \n -> pure (1000.0 + n)
+
+ns :: Array (Effect Number)
+ns = [n1, n2]
+
+-- based on https://book.purescript.org/chapter5.html#do-notation
+pairs :: Array Int
+pairs = do
+  i <- 1 .. 4
+  j <- i .. 4
+  pure (i + j)
+
+ns2 :: Array (Effect Number)
+ns2 = do
+        en1 <- ns
+        pure en1
+
 randeffects :: LL.List (Effect Number)
 randeffects = LL.iterate seedless (pure 0.0)
 
@@ -33,6 +54,9 @@ randeffects3 = LL.take 3 $ LL.iterate seedless (pure 0.0)
 randra :: Array (Effect Number)
 randra = [random, random, random, random]
 
+-- ranums = randra >>= \en -> (en >>= (\n -> pure (show n)))
+-- ranums = randra >>= \en -> (en >>= (\n -> pure (show n)))
+
 
 {-
 main :: Effect Number
@@ -43,12 +67,14 @@ main = do
 
 maybeEffNum :: Maybe (Effect Number) -> Effect Number
 maybeEffNum (Just en) = en
-maybeEffNum Nothing = random >>= \n -> pure (100.0 + n)  -- kluge: if result is above 100, we know it's been Nothing'ed
-
+maybeEffNum Nothing = random *> pure (-1.0)  -- kluge: if result is negative, we know it's been Nothing'ed
+-- *> is Purescript's version of Haskell's >>
 
 
 main :: Effect Unit
 main = do
+        logShow $ pairs
+
         randno <- random
         randno2 <- random
         logShow randno
@@ -78,6 +104,7 @@ main = do
         ranoffend <- maybeEffNum $ index randra 4
 
         log $ "this is a failure: " <> (show ranoffend)
+
         pure unit
 
 {- Doesn't work, though do version about does:
