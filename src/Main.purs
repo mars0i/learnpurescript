@@ -36,12 +36,18 @@ main = do
 main :: Effect Unit
 main = do
         randno <- random
+        randno2 <- random
         logShow randno
+        logShow randno2
+        logShow [randno, randno2]
         pure unit
 
-
-{-
+{- Doesn't work, though do version about does:
 -- I thought I could use >>> which I think is like Haskell's >>, but doesn't work.
 main :: Effect Unit
-main = random >>= \randno -> logShow randno >>= \_ -> pure unit
--}
+main = random >>= \randno -> logShow randno
+              >>= \_ -> random
+              >>= \randno2 -> logShow randno2
+              >>= logShow [randno, randno2]
+              >>= \_ -> pure unit
+              -}
