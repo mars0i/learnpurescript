@@ -78,6 +78,11 @@ maybeEffNum Nothing = random *> pure (-1.0)  -- kluge: if result is negative, we
 
 main :: Effect Unit
 main = do
+        log "This shows how to do stuff inside a container:"
+        z <- pure (_+10000.0) <*> random
+        logShow z
+        log ""
+
         logShow $ pairs
         logShow $ pairs2
 
