@@ -12,6 +12,7 @@ import Effect.Random
 -- import Jack  -- not needed?
 -- import Jack.Seed as JS
 -- import Jack.Rand as JR
+import Control.Alternative (guard)
 
 ricker :: Number → Number → Number → Number
 ricker k r n = n * exp (r * (1.0 - n/k))
@@ -34,9 +35,13 @@ ns = [n1, n2]
 -- based on https://book.purescript.org/chapter5.html#do-notation
 pairs :: Array Int
 pairs = do
-  i <- 1 .. 4
-  j <- i .. 4
+  i <- 1 .. 24
+  j <- i .. 24
+  guard $ i * j == 24
   pure (i + j)
+
+pairs2 = 1..24 >>= \i -> i..24 >>= \j -> guard ((i * j) == 24) *> pure (i + j)
+
 
 ns2 :: Array (Effect Number)
 ns2 = do
@@ -74,6 +79,7 @@ maybeEffNum Nothing = random *> pure (-1.0)  -- kluge: if result is negative, we
 main :: Effect Unit
 main = do
         logShow $ pairs
+        logShow $ pairs2
 
         randno <- random
         randno2 <- random
