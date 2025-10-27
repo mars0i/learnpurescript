@@ -3,6 +3,7 @@ module Main where
 import Prelude
 import Effect (Effect)
 import Effect.Console (log, logShow)
+import Data.Foldable (for_, traverse_)
 import Data.Number (exp)
 import Data.Maybe
 import Data.Array
@@ -116,7 +117,37 @@ main = do
 
         log $ "this is a failure: " <> (show ranoffend)
 
+        log "\nAll random numbers in randra:"
+        for_ randra \en -> do
+           n <- en
+           logShow n
+
+        log "\nAll numbers in randeffects3:"
+        for_ randeffects3 \en -> do
+           n <- en
+           logShow n
+
+        log "\nThe first 10 numbers in randeffects:"
+        for_ (LL.take 10 $ randeffects) \en -> do
+           n <- en
+           logShow n
+
         pure unit
+        
+{-
+
+        let ns = foldl (\acc en -> do 
+                       n <- en
+                       logShow n)
+                 []
+                 (randra :: Array (Effect Number))
+
+        let ns = foldl (\acc -> \en -> do 
+                       n <- en
+                       n : acc) 
+                 [] randra 
+        logShow ns
+        -}
 
 {- Doesn't work, though do version about does:
 -- I thought I could use >>> which I think is like Haskell's >>, but doesn't work.
