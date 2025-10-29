@@ -14,6 +14,7 @@ import Effect.Random
 -- import Jack.Seed as JS
 -- import Jack.Rand as JR
 import Control.Alternative (guard)
+import Data.Monoid (guard) as Monoid -- This guard has a different syntax and semantics
 
 ricker :: Number → Number → Number → Number
 ricker k r n = n * exp (r * (1.0 - n/k))
@@ -34,15 +35,23 @@ ns :: Array (Effect Number)
 ns = [n1, n2]
 
 -- based on https://book.purescript.org/chapter5.html#do-notation
-pairs :: Array Int
+pairs :: Array (Array Int)
 pairs = do
   i <- 1 .. 24
   j <- i .. 24
   guard $ i * j == 24
-  pure (i + j)
+  pure [i, j]
 
-pairs2 = 1..24 >>= \i -> i..24 >>= \j -> guard ((i * j) == 24) *> pure (i + j)
+pairs2 = 1..24 >>= \i -> i..24 >>= 
+                   \j -> guard ((i * j) == 24) *> 
+                   pure [i, j]
 
+-- Version using Monoid's guard:
+pairs3 :: Array (Array Int)
+pairs3 = do
+  i <- 1 .. 24
+  j <- i .. 24
+  Monoid.guard (i * j == 24) pure [i, j]
 
 ns2 :: Array (Effect Number)
 ns2 = do
@@ -82,10 +91,15 @@ main = do
         log "This shows how to do stuff inside a container:"
         z <- pure (_+10000.0) <*> random
         logShow z
+
         log ""
 
+        log "guard illustrations:"
         logShow $ pairs
         logShow $ pairs2
+        logShow $ pairs3
+
+        log ""
 
         randno <- random
         randno2 <- random
