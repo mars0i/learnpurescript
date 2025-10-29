@@ -1,5 +1,5 @@
 import Prelude
 import Data.Int as I
 import Data.Number as N
-import Data.Array
-import Data.List as L
+-- import Data.Array
+-- import Data.List as L
