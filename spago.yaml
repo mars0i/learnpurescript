@@ -42,6 +42,7 @@ workspace:
     # Note this is "array", not "arrays":
     array: 4.0.1 # Data.Array
     foldable-traversable: 6.0.0 # Data.Foldable, etc.
+    math: 4.0.0
     random: 6.0.0
     jack: 2.0.0
     # math: 4.0.0
