@@ -4,8 +4,8 @@ module TwoGuards where
 import Prelude
 import Effect (Effect)
 import Effect.Console (log, logShow)
-import Data.Array
-import Data.EuclideanRing
+import Data.Array ((..)) -- i.e. import the range operator: ..
+import Data.EuclideanRing (mod)
 import Control.Alternative (guard) as A
 import Data.Monoid (guard) as M
 
