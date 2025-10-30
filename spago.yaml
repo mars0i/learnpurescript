@@ -8,17 +8,18 @@ package:
     - effect
     - prelude
     - integers # Data.Int
-    - numbers  # Data.Number
-    - arrays   # Data.Array
-#    - lists    # Data.List
-    - foldable-traversable   # Data.Foldable, etc. foldl, foldr.
-    - lists  # Data.List, Data.List.Lazy
+    - numbers # Data.Number
+    - uint
+    - arrays # Data.Array
+    #    - lists    # Data.List
+    - foldable-traversable # Data.Foldable, etc. foldl, foldr.
+    - lists # Data.List, Data.List.Lazy
     - random
     # not part of package set:
-    # - jack  # has one of L'Ecuyer's generators
+    #- jack # has one of L'Ecuyer's generators
     # needed by jack:
-    # - int-53
-    # - maps
+    #- int-53
+    #- maps
   test:
     main: Test.Main
     dependencies: []
@@ -34,11 +35,11 @@ package:
 
 workspace:
   packageSet:
-    registry: 66.8.0
+    registry: 67.0.1
   extraPackages:
-    numbers: 9.0.1   # Data.Number
-    integers: 6.0.0  # Data.Int
-    lists: 7.0.0  # Data.List, Data.List.Lazy
+    numbers: 9.0.1 # Data.Number
+    integers: 6.0.0 # Data.Int
+    lists: 7.0.0 # Data.List, Data.List.Lazy
     # Note this is "array", not "arrays":
     array: 4.0.1 # Data.Array
     foldable-traversable: 6.0.0 # Data.Foldable, etc.

@@ -16,6 +16,9 @@ import Effect.Random
 import Control.Alternative (guard)
 import Data.Monoid (guard) as Monoid -- This guard has a different syntax and semantics
 
+import Data.Int.Bits as Bits
+import Data.UInt as UInt
+
 ricker :: Number → Number → Number → Number
 ricker k r n = n * exp (r * (1.0 - n/k))
 
@@ -145,6 +148,20 @@ main = do
         for_ (LL.take 10 $ randeffects) \en -> do
            n <- en
            logShow n
+
+        log ""
+        logShow $ Bits.or  5 2  -- 101 | 10 = 7
+        logShow $ Bits.xor 7 2  -- 111 xor 10 = 5
+        logShow $ Bits.shl 3 2  -- 3 = 11 to 1100 = 12
+        logShow $ Bits.shr 16 2 -- 10000 to 100 = 4
+        logShow $ Bits.and 31 2 -- mask all but the 2 bit
+
+        log ""
+        logShow $ UInt.or  (UInt.fromInt 5) (UInt.fromInt 2)  -- 101 | 10 = 7
+        logShow $ UInt.xor (UInt.fromInt 7) (UInt.fromInt 2)  -- 111 xor 10 = 5
+        logShow $ UInt.shl (UInt.fromInt 3) (UInt.fromInt 2)  -- 3 = 11 to 1100 = 12
+        logShow $ UInt.shr (UInt.fromInt 16) (UInt.fromInt 2) -- 10000 to 100 = 4
+        logShow $ UInt.and (UInt.fromInt 31) (UInt.fromInt 2) -- mask all but the 2 bit
 
         pure unit
         

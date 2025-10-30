@@ -13,7 +13,8 @@
             "lists",
             "numbers",
             "prelude",
-            "random"
+            "random",
+            "uint"
           ],
           "build_plan": [
             "arrays",
@@ -25,10 +26,12 @@
             "distributive",
             "effect",
             "either",
+            "enums",
             "exists",
             "foldable-traversable",
             "functions",
             "functors",
+            "gen",
             "identity",
             "integers",
             "invariant",
@@ -49,6 +52,7 @@
             "tailrec",
             "tuples",
             "type-equality",
+            "uint",
             "unfoldable",
             "unsafe-coerce"
           ]
@@ -61,7 +65,7 @@
     },
     "package_set": {
       "address": {
-        "registry": "66.8.0"
+        "registry": "67.0.1"
       },
       "compiler": ">=0.15.15 <0.16.0",
       "content": {
@@ -173,7 +177,7 @@
         "elmish-hooks": "0.11.0",
         "elmish-html": "0.9.0",
         "elmish-testing-library": "0.3.2",
-        "elmish-time-machine": "0.4.1",
+        "elmish-time-machine": "0.4.2",
         "email-validate": "7.0.0",
         "encoding": "0.0.9",
         "enums": "6.0.1",
@@ -227,7 +231,7 @@
         "generic-router": "0.0.1",
         "geojson": "0.0.5",
         "geometria": "2.2.0",
-        "gesso": "1.0.0",
+        "gesso": "1.0.1",
         "gojs": "0.1.1",
         "golem-fetch": "0.1.0",
         "grain": "3.0.0",
@@ -400,7 +404,7 @@
         "phylio": "1.1.2",
         "pipes": "8.0.0",
         "pirates-charm": "0.0.1",
-        "play": "0.1.0",
+        "play": "0.2.1",
         "pmock": "0.9.0",
         "point-free": "1.0.0",
         "pointed-list": "0.5.1",
@@ -474,7 +478,7 @@
         "selection-foldable": "0.2.0",
         "selective-functors": "1.0.1",
         "semirings": "7.0.0",
-        "shuffle": "1.1.0",
+        "shuffle": "2.0.0",
         "signal": "13.0.0",
         "simple-emitter": "3.0.1",
         "simple-i18n": "2.0.1",
@@ -596,6 +600,7 @@
         "which": "2.0.0",
         "whine-core": "0.0.32",
         "xterm": "1.0.0",
+        "yaml-next": "3.1.1",
         "yoga-fetch": "1.0.1",
         "yoga-json": "5.1.0",
         "yoga-om": "0.1.0",
@@ -725,6 +730,23 @@
         "prelude"
       ]
     },
+    "enums": {
+      "type": "registry",
+      "version": "6.0.1",
+      "integrity": "sha256-HWaD73JFLorc4A6trKIRUeDMdzE+GpkJaEOM1nTNkC8=",
+      "dependencies": [
+        "control",
+        "either",
+        "gen",
+        "maybe",
+        "newtype",
+        "nonempty",
+        "partial",
+        "prelude",
+        "tuples",
+        "unfoldable"
+      ]
+    },
     "exists": {
       "type": "registry",
       "version": "6.0.0",
@@ -777,6 +799,23 @@
         "profunctor",
         "tuples",
         "unsafe-coerce"
+      ]
+    },
+    "gen": {
+      "type": "registry",
+      "version": "4.0.0",
+      "integrity": "sha256-f7yzAXWwr+xnaqEOcvyO3ezKdoes8+WXWdXIHDBCAPI=",
+      "dependencies": [
+        "either",
+        "foldable-traversable",
+        "identity",
+        "maybe",
+        "newtype",
+        "nonempty",
+        "prelude",
+        "tailrec",
+        "tuples",
+        "unfoldable"
       ]
     },
     "identity": {
@@ -984,6 +1023,19 @@
       "version": "4.0.1",
       "integrity": "sha256-Hs9D6Y71zFi/b+qu5NSbuadUQXe5iv5iWx0226vOHUw=",
       "dependencies": []
+    },
+    "uint": {
+      "type": "registry",
+      "version": "7.0.0",
+      "integrity": "sha256-fQ30YjiKz9DS6yqRdmK+WARVbJhpZDDTRcpFw675b6M=",
+      "dependencies": [
+        "effect",
+        "enums",
+        "gen",
+        "maybe",
+        "numbers",
+        "prelude"
+      ]
     },
     "unfoldable": {
       "type": "registry",
