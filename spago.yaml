@@ -11,29 +11,16 @@ package:
     - numbers # Data.Number
     - uint
     - arrays # Data.Array
+    - strings # Data.String, etc.
     #    - lists    # Data.List
     - foldable-traversable # Data.Foldable, etc. foldl, foldr.
     - lists # Data.List, Data.List.Lazy
     - random
-    # not part of package set:
-    #- jack # has one of L'Ecuyer's generators
-    # needed by jack:
-    #- int-53
-    #- maps
-  test:
-    main: Test.Main
-    dependencies: []
-  build:
-    # Get rid of warnings that make exploration noisy.
-    # https://discourse.purescript.org/t/newbie-question-suppress-some-warnings/2851/9?u=mars0i
-    censorProjectWarnings:
-      - ImplicitImport
-      - MissingTypeDeclaration
-      - ShadowedName
-      - UnusedExplicitImport
-      - UnusedImport
+    # not doing to work at present:
+    # - jack # has one of L'Ecuyer's generators
 
 workspace:
+  # One can do without this:
   packageSet:
     registry: 67.0.1
   extraPackages:
@@ -45,6 +32,7 @@ workspace:
     foldable-traversable: 6.0.0 # Data.Foldable, etc.
     math: 4.0.0
     random: 6.0.0
-    jack: 2.0.0
+    strings: 6.0.1
+    # jack: 2.0.0
     # math: 4.0.0
     # Math has been deprecated and I can't get the package installed.

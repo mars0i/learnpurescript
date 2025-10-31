@@ -14,6 +14,7 @@
             "numbers",
             "prelude",
             "random",
+            "strings",
             "uint"
           ],
           "build_plan": [
@@ -49,6 +50,7 @@
             "refs",
             "safe-coerce",
             "st",
+            "strings",
             "tailrec",
             "tuples",
             "type-equality",
@@ -618,11 +620,11 @@
       "array": "4.0.1",
       "foldable-traversable": "6.0.0",
       "integers": "6.0.0",
-      "jack": "2.0.0",
       "lists": "7.0.0",
       "math": "4.0.0",
       "numbers": "9.0.1",
-      "random": "6.0.0"
+      "random": "6.0.0",
+      "strings": "6.0.1"
     }
   },
   "packages": {
@@ -990,6 +992,29 @@
         "partial",
         "prelude",
         "tailrec",
+        "unsafe-coerce"
+      ]
+    },
+    "strings": {
+      "type": "registry",
+      "version": "6.0.1",
+      "integrity": "sha256-WssD3DbX4OPzxSdjvRMX0yvc9+pS7n5gyPv5I2Trb7k=",
+      "dependencies": [
+        "arrays",
+        "control",
+        "either",
+        "enums",
+        "foldable-traversable",
+        "gen",
+        "integers",
+        "maybe",
+        "newtype",
+        "nonempty",
+        "partial",
+        "prelude",
+        "tailrec",
+        "tuples",
+        "unfoldable",
         "unsafe-coerce"
       ]
     },
