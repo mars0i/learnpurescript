@@ -15,6 +15,7 @@
             "prelude",
             "random",
             "strings",
+            "transformers",
             "uint"
           ],
           "build_plan": [
@@ -28,6 +29,7 @@
             "effect",
             "either",
             "enums",
+            "exceptions",
             "exists",
             "foldable-traversable",
             "functions",
@@ -52,6 +54,7 @@
             "st",
             "strings",
             "tailrec",
+            "transformers",
             "tuples",
             "type-equality",
             "uint",
@@ -749,6 +752,17 @@
         "unfoldable"
       ]
     },
+    "exceptions": {
+      "type": "registry",
+      "version": "6.1.0",
+      "integrity": "sha256-K0T89IHtF3vBY7eSAO7eDOqSb2J9kZGAcDN5+IKsF8E=",
+      "dependencies": [
+        "effect",
+        "either",
+        "maybe",
+        "prelude"
+      ]
+    },
     "exists": {
       "type": "registry",
       "version": "6.0.0",
@@ -1031,6 +1045,28 @@
         "partial",
         "prelude",
         "refs"
+      ]
+    },
+    "transformers": {
+      "type": "registry",
+      "version": "6.1.0",
+      "integrity": "sha256-3Bm+Z6tsC/paG888XkywDngJ2JMos+JfOhRlkVfb7gI=",
+      "dependencies": [
+        "control",
+        "distributive",
+        "effect",
+        "either",
+        "exceptions",
+        "foldable-traversable",
+        "identity",
+        "lazy",
+        "maybe",
+        "newtype",
+        "prelude",
+        "st",
+        "tailrec",
+        "tuples",
+        "unfoldable"
       ]
     },
     "tuples": {
