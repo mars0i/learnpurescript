@@ -9,6 +9,8 @@ import Effect.Console (log, logShow)
 import Control.Monad.State
 import Data.Tuple
 import Data.Identity
+import Data.Array
+import Data.Maybe
 
 -- From Hutton sect 12.3
 
@@ -64,8 +66,20 @@ undoneSumTree (Node n t1 t2) =
 
 -------------------------------
 
+-- Remember that 'type' defines an alias and not a new type.
+type Table a = Array a  -- [a] can't be used as a type name in Purescript, apparently
+
+-- Note trick: We want a function from a to a function from Table to Tuple.
+-- But we use currying to references the second "argument" in the def.
+nNode :: forall a. Eq a => a -> Table a -> (Tuple (Table a) Int)
+nNode x table = case (elemIndex x table) of   -- avoids redundancy of Thompson's
+                     Just k -> Tuple table k  -- if item is in table, use its index
+                     Nothing -> Tuple (table <> [x]) (length table) -- else add it
+
+
+
 numberNode :: forall a. Eq a => a -> State a Int
-numberNode _ = ?numberNode
+numberNode x = state (nNode x)
 
 
 numberTree :: forall a. Eq a => Tree a -> State a (Tree Int)
@@ -75,7 +89,6 @@ numberTree (Node x t1 t2) =
            nt1 <- numberTree t1
            nt2 <- numberTree t2
            pure (Node num nt1 nt2)
-
 
 
 
