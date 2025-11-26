@@ -7,10 +7,12 @@ import Partial.Unsafe (unsafePartial)
 import Effect.Console (log, logShow)
 
 import Control.Monad.State
+import Control.Monad.State.Class
 import Data.Tuple
 import Data.Identity
 import Data.Array
 import Data.Maybe
+import Data.Foldable (traverse_, for_)
 
 -- From Hutton sect 12.3
 
@@ -22,7 +24,7 @@ fresh :: State (\n -> Tuple n (n+1))
 -}
 
 
--- Based on Thomson _Haskell: The Craft of Functional Programming", 3rd ed. 2023,
+-- Based on Thompson _Haskell: The Craft of Functional Programming", 3rd ed. 2023,
 -- section 18.6, pp. 505ff
 
 deidentity :: forall a. Identity a -> a
@@ -78,6 +80,7 @@ nNode x table = case (elemIndex x table) of   -- avoids redundancy of Thompson's
 
 
 
+{-
 numberNode :: forall a. Eq a => a -> State a Int
 numberNode x = state (nNode x)
 
@@ -89,15 +92,70 @@ numberTree (Node x t1 t2) =
            nt1 <- numberTree t1
            nt2 <- numberTree t2
            pure (Node num nt1 nt2)
+-}
+
+-- From Purescript by Example chapter 11, section "The State Monad"
+-- https://book.purescript.org/chapter11.html#the-state-monad
+sumArray :: Array Int -> State Int Unit
+sumArray = traverse_ \n -> modify \sum -> sum + n
 
 
+                         
+{- My version of the following, from
+https://brandon.si/code/the-state-monad-a-tutorial-for-the-confused:
+(>>=) :: State s a -> (a -> State s b) -> State s b
+m >>= k = State $ \s -> let (a, s') = runState m s
+                         in runState (k a) s'
+Note the first arg to the second runState is a function application, not a tuple. -}
+blah :: forall s a b. State s a -> (a -> State s b) -> State s b
+blah m k = state (\s -> let (Tuple a s') = runState m s
+                         in runState (k a) s')
+
+
+-- Based on https://brandon.si/code/the-state-monad-a-tutorial-for-the-confused:
+
+fromStoAndS :: Int -> (Tuple String Int)
+fromStoAndS c | (c `mod` 5) == 0 = Tuple "five-zero" (c + 1)
+              | otherwise = Tuple "not-zero" (c + 1)
+
+stateIntString :: State Int String
+stateIntString = state fromStoAndS 
 
 -------------------------------
 
 main :: Effect Unit
 main = void $ unsafePartial do
-  log "Values should be 41:"
+  -- https://brandon.si/code/the-state-monad-a-tutorial-for-the-confused:
+  logShow $ runState stateIntString 0
+  logShow $ runState stateIntString 1
+  logShow $ runState stateIntString 2
+  logShow $ runState stateIntString 3
+  logShow $ runState stateIntString 4
+  logShow $ runState stateIntString 5
+  logShow $ runState stateIntString 6
+  log "\n"
+  logShow $ runState (stateIntString *> stateIntString *> stateIntString) 3
+  -- This time with do:
+  logShow $ runState (do
+                     _ <- stateIntString -- dunno why I have to add "_ <-"
+                     _ <- stateIntString
+                     stateIntString) 3
+  -- Thompson _Haskell: The Craft of Functional Programming", pp. 505ff:
+  log "\nValues should be 41:"
   logShow $ deidentity $ sumTree mynumtree
   logShow $ deidentity $ undoneSumTree mynumtree
+  log "\n"
+  -- based on https://book.purescript.org/chapter11.html#the-state-monad
+  logShow $ runState (do sumArray [1, 2, 3]
+                         sumArray [4, 5]
+                         sumArray [6]) 0
+  -- Same thing without do:
+  logShow $ runState (sumArray [1,2,3] *> sumArray [4,5] *> sumArray [6]) 0
+
+  log "\n"
+  -- doesn't do what I'd hoped:
+  logShow $ (for_ (0 .. 10) \_ -> do
+     runState stateIntString) 0
+
 
 
