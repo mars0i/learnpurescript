@@ -10,10 +10,12 @@
             "effect",
             "foldable-traversable",
             "integers",
+            "lcg",
             "lists",
             "numbers",
             "prelude",
             "random",
+            "splitmix",
             "strings",
             "transformers",
             "uint"
@@ -32,17 +34,21 @@
             "exceptions",
             "exists",
             "foldable-traversable",
+            "foreign",
             "functions",
             "functors",
             "gen",
             "identity",
+            "int64",
             "integers",
             "invariant",
             "lazy",
+            "lcg",
             "lists",
             "maybe",
             "newtype",
             "nonempty",
+            "nullable",
             "numbers",
             "orders",
             "partial",
@@ -51,6 +57,7 @@
             "random",
             "refs",
             "safe-coerce",
+            "splitmix",
             "st",
             "strings",
             "tailrec",
@@ -789,6 +796,22 @@
         "tuples"
       ]
     },
+    "foreign": {
+      "type": "registry",
+      "version": "7.0.0",
+      "integrity": "sha256-1ORiqoS3HW+qfwSZAppHPWy4/6AQysxZ2t29jcdUMNA=",
+      "dependencies": [
+        "either",
+        "functions",
+        "identity",
+        "integers",
+        "lists",
+        "maybe",
+        "prelude",
+        "strings",
+        "transformers"
+      ]
+    },
     "functions": {
       "type": "registry",
       "version": "6.0.0",
@@ -845,6 +868,22 @@
         "prelude"
       ]
     },
+    "int64": {
+      "type": "registry",
+      "version": "3.0.0",
+      "integrity": "sha256-IK5NkLmqjdyqHo7MC3W2loWnpIzTjjJgSyePGV0Jw+c=",
+      "dependencies": [
+        "effect",
+        "foreign",
+        "functions",
+        "gen",
+        "integers",
+        "maybe",
+        "nullable",
+        "prelude",
+        "unsafe-coerce"
+      ]
+    },
     "integers": {
       "type": "registry",
       "version": "6.0.0",
@@ -873,6 +912,19 @@
         "foldable-traversable",
         "invariant",
         "prelude"
+      ]
+    },
+    "lcg": {
+      "type": "registry",
+      "version": "4.0.0",
+      "integrity": "sha256-h7ME5cthLfbgJOJdsZcSfFpwXsx4rf8YmhebU+3iSYg=",
+      "dependencies": [
+        "effect",
+        "integers",
+        "maybe",
+        "partial",
+        "prelude",
+        "random"
       ]
     },
     "lists": {
@@ -925,6 +977,16 @@
         "prelude",
         "tuples",
         "unfoldable"
+      ]
+    },
+    "nullable": {
+      "type": "registry",
+      "version": "6.0.0",
+      "integrity": "sha256-yiGBVl3AD+Guy4kNWWeN+zl1gCiJK+oeIFtZtPCw4+o=",
+      "dependencies": [
+        "effect",
+        "functions",
+        "maybe"
       ]
     },
     "numbers": {
@@ -996,6 +1058,21 @@
       "integrity": "sha256-a1ibQkiUcbODbLE/WAq7Ttbbh9ex+x33VCQ7GngKudU=",
       "dependencies": [
         "unsafe-coerce"
+      ]
+    },
+    "splitmix": {
+      "type": "registry",
+      "version": "2.1.0",
+      "integrity": "sha256-iZy+c5f+PqKfkxdgqCi5n/S/XDEoCVsoF4l79aw8pIs=",
+      "dependencies": [
+        "console",
+        "effect",
+        "int64",
+        "integers",
+        "maybe",
+        "partial",
+        "prelude",
+        "tuples"
       ]
     },
     "st": {

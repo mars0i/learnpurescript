@@ -16,6 +16,8 @@ package:
     - foldable-traversable # Data.Foldable, etc. foldl, foldr.
     - lists # Data.List, Data.List.Lazy
     - random
+    - splitmix
+    - lcg
     - transformers
     # not doing to work at present:
     # - jack # has one of L'Ecuyer's generators
