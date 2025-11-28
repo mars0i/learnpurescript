@@ -113,7 +113,6 @@ blah m k = state (\s -> let (Tuple a s') = runState m s
 
 
 -- Based on https://brandon.si/code/the-state-monad-a-tutorial-for-the-confused:
-
 fromStoAndS :: Int -> (Tuple String Int)
 fromStoAndS c | (c `mod` 5) == 0 = Tuple "five-zero" (c + 1)
               | otherwise = Tuple "not-zero" (c + 1)
@@ -134,12 +133,17 @@ main = void $ unsafePartial do
   logShow $ runState stateIntString 5
   logShow $ runState stateIntString 6
   log "\n"
+  log "logShow $ runState (stateIntString *> stateIntString *> stateIntString) 3 :"
   logShow $ runState (stateIntString *> stateIntString *> stateIntString) 3
   -- This time with do:
   logShow $ runState (do
                      _ <- stateIntString -- dunno why I have to add "_ <-"
                      _ <- stateIntString
                      stateIntString) 3
+  log "Q1: Why does each call to of stateIntStr only inc state once?"
+  log "The def of `>==` seems to do it twice."
+  log "Q2: How is the state passed along given use of `*>`?"
+
   -- Thompson _Haskell: The Craft of Functional Programming", pp. 505ff:
   log "\nValues should be 41:"
   logShow $ deidentity $ sumTree mynumtree
