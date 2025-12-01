@@ -11,6 +11,7 @@ import Control.Monad.State.Class
 import Data.Tuple
 import Data.Identity
 import Data.Array
+import Data.List as L
 import Data.Maybe
 import Data.Foldable (traverse_, for_)
 
@@ -119,6 +120,31 @@ fromStoAndS c | (c `mod` 5) == 0 = Tuple "five-zero" (c + 1)
 
 stateIntString :: State Int String
 stateIntString = state fromStoAndS 
+
+-------------------------------
+-- From Lipovaca pp. 316ff
+
+type Stack = L.List Int
+
+push :: Int -> State Stack Unit
+push a = state $ \xs -> (Tuple unit (L.Cons a xs))
+
+pop :: State Stack Int
+pop = unsafePartial $ state $ \(L.Cons x xs) -> (Tuple x xs)
+-- pop = state $ \L.Nil -> (Tuple 0 L.Nil)
+
+{- btw:
+-- This works:
+foo :: L.List Int -> Tuple Int (L.List Int)
+foo L.Nil = Tuple 0 L.Nil
+foo (L.Cons x xs) = Tuple x xs
+
+-- I don't think there's a way to do this:
+bar :: Array Int -> Tuple Int (Array Int)
+bar [] = Tuple 0 []
+bar (x:xs) = Tuple x xs
+-}
+
 
 -------------------------------
 
