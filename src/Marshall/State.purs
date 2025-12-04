@@ -124,6 +124,8 @@ stateIntString = state fromStoAndS
 -------------------------------
 -- From Lipovaca pp. 316ff
 
+-- Stack, push, and pop moved below to Snyder section
+{-
 type Stack = L.List Int
 
 push :: Int -> State Stack Unit
@@ -132,6 +134,7 @@ push a = state $ \xs -> (Tuple unit (L.Cons a xs))
 pop :: State Stack Int
 pop = unsafePartial $ state $ \(L.Cons x xs) -> (Tuple x xs)
 -- pop = state $ \L.Nil -> (Tuple 0 L.Nil)
+-}
 
 {- btw:
 -- This works:
@@ -148,19 +151,45 @@ bar (x:xs) = Tuple x xs
 
 -- From https://www.cs.bu.edu/fac/snyder/cs320/Lectures/Lecture12--%20State%20Monad.pdf
 
-mult :: Stack -> State Stack Unit
-mult (L.Cons x (L.Cons y xs)) = push (x * y)
-mult xs = state $ \xs -> (Tuple unit xs)
+type Stack = L.List Int
 
-sf3 :: State Stack Int
-sf3 = push 2 >>= (\_ -> (push 5)
-             >>= (\_ -> (push 8)
-             >>= (\_ -> pop
-             >>= (\x -> pop
-             >>= (\y -> (push (x - y))
-             >>= (\z -> mult
-             >>= (\_ -> pop)))))))
+push :: Int -> State Stack Int
+push a = state $ \xs -> (Tuple a (L.Cons a xs))
+
+pop :: State Stack Int
+pop = unsafePartial $ state $ \(L.Cons x xs) -> (Tuple x xs)
+-- pop = state $ \L.Nil -> (Tuple 0 L.Nil)
+
+mult :: State Stack Int
+mult = pop >>= \x -> pop >>= \y -> push (x * y)
+
+domult :: State Stack Int
+domult = do x <- pop
+            y <- pop
+            push (x * y)
+
+-- mult (L.Cons x (L.Cons y xs)) = push (x * y)
+
+-- usage: runState prog <somelist>
+prog :: State Stack Int
+prog = push 2 >>= (\_ -> (push 5)
+              >>= (\_ -> (push 8)
+              >>= (\_ -> pop
+              >>= (\x -> pop
+              >>= (\y -> (push (x - y))
+              >>= (\_ -> mult
+              >>= (\_ -> pop)))))))
       
+-- usage: runState doprog <somelist>
+doprog :: State Stack Int
+doprog = push 2 >>= (\_ -> (push 5)
+                >>= (\_ -> (push 8)
+                >>= (\_ -> pop
+                >>= (\x -> pop
+                >>= (\y -> (push (x - y))
+                >>= (\_ -> domult
+                >>= (\_ -> pop)))))))
+       
 
 -------------------------------
 
