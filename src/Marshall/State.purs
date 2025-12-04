@@ -146,6 +146,22 @@ bar (x:xs) = Tuple x xs
 -}
 
 
+-- From https://www.cs.bu.edu/fac/snyder/cs320/Lectures/Lecture12--%20State%20Monad.pdf
+
+mult :: Stack -> State Stack Unit
+mult (L.Cons x (L.Cons y xs)) = push (x * y)
+mult xs = state $ \xs -> (Tuple unit xs)
+
+sf3 :: State Stack Int
+sf3 = push 2 >>= (\_ -> (push 5)
+             >>= (\_ -> (push 8)
+             >>= (\_ -> pop
+             >>= (\x -> pop
+             >>= (\y -> (push (x - y))
+             >>= (\z -> mult
+             >>= (\_ -> pop)))))))
+      
+
 -------------------------------
 
 main :: Effect Unit
