@@ -6,8 +6,9 @@ import Control.Monad.State
 import Data.List
 import Data.Tuple
 
-push :: Int -> State (List Int) Int
-push a = state $ \xs -> (Tuple a (Cons a xs))
+-- Replaced Int with Unit in output to get rid of need for `_ <-` in `do`.
+push :: Int -> State (List Int) Unit
+push a = state $ \xs -> (Tuple unit (Cons a xs))
 
 pop :: State (List Int) Int
 pop = unsafePartial $ state $ \(Cons x xs) -> (Tuple x xs)
@@ -22,7 +23,7 @@ prog1 = push 2 *>
 -- value has been declared an instance of `Control.Bind.Discard, 
 -- as for example Unit has been.
 prog2 :: State (List Int) Int
-prog2 = do _ <- push 2
+prog2 = do push 2
            x <- pop
-           _ <- push (- x)
+           push (- x)
            pop
