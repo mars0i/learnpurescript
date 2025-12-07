@@ -634,7 +634,8 @@
       "math": "4.0.0",
       "numbers": "9.0.1",
       "random": "6.0.0",
-      "strings": "6.0.1"
+      "strings": "6.0.1",
+      "transformers": "6.1.0"
     }
   },
   "packages": {

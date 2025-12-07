@@ -36,6 +36,7 @@ workspace:
     math: 4.0.0
     random: 6.0.0
     strings: 6.0.1
+    transformers: 6.1.0
     # jack: 2.0.0
     # math: 4.0.0
     # Math has been deprecated and I can't get the package installed.
