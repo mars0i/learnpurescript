@@ -142,7 +142,7 @@ foo :: L.List Int -> Tuple Int (L.List Int)
 foo L.Nil = Tuple 0 L.Nil
 foo (L.Cons x xs) = Tuple x xs
 
--- I don't think there's a way to do this:
+-- I don't think there's a way to 
 bar :: Array Int -> Tuple Int (Array Int)
 bar [] = Tuple 0 []
 bar (x:xs) = Tuple x xs

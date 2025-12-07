@@ -71,15 +71,24 @@ prog3 = push 2 >>= \_ -> push 5
                >>= \_ -> domult
                >>= \_ -> pop
 
--- Why do I have to add the "_ <-"s??
 prog4 :: State Stack Int
-prog4 = do _ <- push 2 
+prog4 = push 2 *> push 5
+               *> push 8
+               *> pop
+               >>= \x -> pop
+               >>= \y -> push (x - y)
+               *> domult
+               *> pop
+
+-- Why do I have to add the "_ <-"s??
+prog5 :: State Stack Int
+prog5 = do _ <- push 2 
            _ <- push 5
            _ <- push 8
            x <- pop
            y <- pop
            _ <- push (x - y)
-           _ <- mult
+           _ <- domult
            pop
 
 -------------------------------
