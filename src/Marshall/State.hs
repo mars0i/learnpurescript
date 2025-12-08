@@ -24,3 +24,17 @@ prog = push 2 >>= (\_ -> (push 5)
               >>= (\y -> (push (x - y))
               >>= (\z -> mult
               >>= (\_ -> pop)))))))
+
+
+-- usage: runState prog <somelist>
+prog2 :: State Stack Integer
+prog2 = do push 2 
+           push 5
+           push 8
+           x <- pop
+           y <- pop
+           z <- push (x - y)
+           mult
+           push z
+           mult
+           pop
